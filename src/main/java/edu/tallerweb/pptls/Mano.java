@@ -1,27 +1,66 @@
 package edu.tallerweb.pptls;
 
-/**
- * Representa una de las Manos involucradas en el juego
- */
 public class Mano {
 
-	/**
-	 * Toda Mano debe crearse con una forma dada, que será
-	 * la que determine su condición en el juego.
-	 * @param forma, la Forma que adopta la Mano.
-	 */
+	private final Forma valor;
+
 	public Mano(final Forma forma) {
-		throw new RuntimeException("No implementado aún");
-	}
+		
+		this.valor = forma;
+		
+		if(forma == null) {
+			
+			throw new RuntimeException("No implementado aún");
+			
+		}
 
-	/**
-	 * Evaluará el resultado de la partida según las reglas
-	 * del juego.
-	 * @param otra, la otra Mano.
-	 * @return un Resultado, de acuerdo al estado del juego.
-	 */
+	}
+	
 	public Resultado jugarCon(final Mano otra) {
-		throw new RuntimeException("No implementado aún");
+		
+		Integer manoUno = this.valor.getValor();
+		Integer manoDos = otra.valor.getValor();
+		
+		if((manoUno == 0) && (manoDos > 2) ) {//GANA PIEDRA
+			
+			return Resultado.GANA;
+			
+		}
+		
+		if((manoUno == 1) && (manoDos == 4 || manoDos == 0)) { //GANA SPOCK
+			
+			return Resultado.GANA;
+			
+		}
+		
+		if((manoUno == 4) && (manoDos == 2 || manoDos == 3)) {//GANA TIJERA
+			
+			return Resultado.GANA;
+			
+		}
+		
+		if((manoUno == 3) && (manoDos == 2 || manoDos == 1)) {//GANA LAGARTO
+			
+			return Resultado.GANA;
+			
+		}
+		
+		if((manoUno == 2) && (manoDos < 2)) {//GANA PAPEL
+			
+			return Resultado.GANA;
+			
+		}
+		
+		if(this.valor.equals(otra.valor)) {//EMPATA
+			
+			return Resultado.EMPATA;
+			
+		}
+		
+		return Resultado.PIERDE;
+		
 	}
-
 }
+
+
+
